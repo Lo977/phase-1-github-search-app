@@ -1,5 +1,6 @@
 #main {
   display: flex;
+  justify-content: center;
   flex-direction: column;
   align-items: center;
 }
@@ -11,3 +12,31 @@
 ul {
   list-style: none;
 }
+.button {
+  cursor: pointer;
+  background: transparent;
+  padding: 5px;
+  border-radius: 5px;
+  border-style: none;
+  /* text-decoration: underline; */
+  /* background-color: lightseagreen; */
+  color: blue;
+  font-size: 1rem;
+  margin-bottom: 5px;
+  margin-right: 70px;
+}
+/* button:hover {
+  background-color: rgb(200, 196, 196);
+  color: white;
+} */
+.button:active {
+  color: rgb(251, 91, 11);
+}
+img {
+  display: block;
+  width: 300px;
+  height: auto;
+}
+/* #github-container {
+  justify-content: space-between; */
+} */
