@@ -18,35 +18,27 @@ document.addEventListener("DOMContentLoaded", () => {
 
 function renderCard(user) {
   const card = document.createElement("li");
-  const h3 = document.createElement("h3");
-  h3.textContent = user.login;
-  const repoList = document.createElement("li");
-  repoList.className = "button";
-  repoList.innerText = `view ${user.login}'s repository`;
-  repoList.addEventListener("click", () => {
+  card.innerHTML = `
+  <h3>${user.login}</h3>
+  <li class="button" >view ${user.login}'s repository</li>
+  <a href="${user.html_url}">view ${user.login}'s profile !</a>
+  <img src="${user.avatar_url}">
+   `;
+  document.getElementById("user-list").append(card);
+  card.querySelector(".button").addEventListener("click", () => {
     fetch(`https://api.github.com/users/${user.login}/repos`)
       .then((res) => res.json())
       .then((repo) => {
         repo.forEach((repo) => {
           //   console.log(repo);
 
-          const li = document.createElement("li");
-          const a = document.createElement("a");
-          a.innerText = repo.html_url;
-          a.href = repo.html_url;
-          document.getElementById("repos-list").append(li, a);
+          const repoList = document.createElement("li");
+          repoList.innerHTML = `
+          <a href="${repo.html_url}">${repo.html_url}</a>`;
+          document.getElementById("repos-list").append(repoList);
         });
       })
       .catch((err) => console.log(err));
     repoList.style.color = "red";
   });
-  //  User's profile
-  const profile = document.createElement("a");
-  profile.href = user.html_url;
-  profile.innerText = `view ${user.login}'s profile !`;
-
-  const img = document.createElement("img");
-  img.src = user.avatar_url;
-  card.append(h3, repoList, profile, img);
-  document.getElementById("user-list").append(card);
 }
